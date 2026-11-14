@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-gNvDe+UXtr8t9wbXrZqY/Rvstdgfx8prBwh58kDBAqg='; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; media-src 'self' blob:; connect-src 'self' https://api.anthropic.com https://www.googleapis.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'" />
+    <script>
+      // ほかのサイトの中に枠で埋め込まれたら、画面を出しません（GitHub Pages ではヘッダーで止められないため。仕様 32-2）。
+      if (window.top !== window.self) document.documentElement.style.display = 'none';
+      // CSS と画面の読み込み前に表示モードを適用します。
+      try {
+        const saved = JSON.parse(localStorage.getItem('goal-note:data') || 'null');
+        // 保存の形（schemaVersion）に関わらず、設定の明るさを先に当てます（仕様 38）。
+        const theme = saved?.settings?.theme;
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch { /* 読めない設定は端末に合わせます。 */ }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!-- 検索サイトに出さない（仕様 32-2）。robots.txt で止めると noindex が読まれないので置かない -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+    <!-- リンク先に、このアプリのアドレスを渡さない -->
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#1f6feb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="目標ノート" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+    <title>目標ノート</title>
+    <script type="module" crossorigin src="./assets/index-BNWtkAOt.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BYJh8DHD.css">
+  <link rel="manifest" href="./manifest.webmanifest"></head>
+  <body>
+    <main id="app"></main>
+    <nav id="nav" class="nav" aria-label="メインメニュー"></nav>
+  </body>
+</html>
